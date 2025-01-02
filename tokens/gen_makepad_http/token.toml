@@ -1,7 +1,10 @@
 [plugin]
-name = "hello"
+name = "gen_makepad_http"
+authors = ["syf<syf20020816@outlook.com>"]
+version = "0.1.0"
+description = "http support for makepad"
 category = "network"
-repo = {git = "https://github.com/Privoce/genui_plugins/tree/main/projects/gen_makepad_http"}
+repo = { git = "https://github.com/Privoce/genui_plugins/tree/main/projects/gen_makepad_http" }
 
 [macros]
-http_get = { category = "prop_macro", stmts = "let http_get_tk_stmt = | expr_macro : & mut syn :: ExprMacro | { let mut tokens = expr_macro . mac . tokens . clone () ; tokens . extend (quote :: quote ! { , cx }) ; expr_macro . mac . tokens = tokens ; } ; let _ = http_get_tk_stmt (expr_macro) ;" }
+http_get = { category = "prop_macro", stmts = 'if mac . ident == "http_get" { mac . tokens . push_str (", cx") ; }' }
