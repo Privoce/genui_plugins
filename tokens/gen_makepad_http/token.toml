@@ -1,0 +1,7 @@
+[plugin]
+name = "hello"
+category = "network"
+repo = {git = ""}
+
+[macros]
+http_get = { category = "prop_macro", stmts = "let http_get_tk_stmt = | expr_macro : & mut syn :: ExprMacro | { let mut tokens = expr_macro . mac . tokens . clone () ; tokens . extend (quote :: quote ! { , cx }) ; expr_macro . mac . tokens = tokens ; } ; let _ = http_get_tk_stmt (expr_macro) ;" }
