@@ -1,5 +1,12 @@
 use std::fmt::Display;
 
+/// # Content-Type for Http Request Header
+/// - Text: `text/plain`
+/// - Json: `application/json`
+/// - Xml: `application/xml`
+/// - Html: `text/html`
+/// - Other: `other content type`
+#[derive(Debug, Clone, PartialEq, Hash)]
 pub enum ContentType {
     Text,
     Json,

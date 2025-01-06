@@ -1,14 +1,17 @@
 use std::collections::HashMap;
 
-use crate::{ContentType, Header, Protocol};
+use crate::{ContentType, HttpRequestHeader, Protocol};
 
-/// # 基础HTTP配置
-/// 当后续HTTP请求没有任何特殊配置时，使用此配置
+/// # Basic Config for Http Publisher
+/// the real request will be: `BasicConfig` + `PatchRequest`
+/// ## Default Config
+/// - protocol: `Protocol::Http`
+/// - headers: `Content-Type: application/json`
 #[derive(Debug, Clone)]
 pub struct BasicConfig {
     pub protocol: Protocol,
     pub url: String,
-    pub headers: HashMap<Header, String>,
+    pub headers: HashMap<HttpRequestHeader, String>,
 }
 
 impl BasicConfig {
@@ -16,9 +19,12 @@ impl BasicConfig {
         BasicConfig {
             protocol: Protocol::Http,
             url,
-            headers: vec![(Header::ContentType, ContentType::Json.to_string())]
+            headers: vec![(HttpRequestHeader::ContentType, ContentType::Json.to_string())]
                 .into_iter()
                 .collect(),
         }
+    }
+    pub fn push_header(&mut self, header: HttpRequestHeader, value: String) {
+        self.headers.insert(header, value);
     }
 }
