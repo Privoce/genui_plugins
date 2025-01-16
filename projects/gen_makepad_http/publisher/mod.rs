@@ -67,6 +67,7 @@ impl HttpPublisher {
         url: &str,
         patch: P,
         method: M,
+        live_id: LiveId,
     ) -> Result<HttpRequest, Box<dyn Error>>
     where
         M: Into<HttpMethod>,
@@ -79,7 +80,7 @@ impl HttpPublisher {
             headers.extend(patch_headers);
         }
         let mut request = HttpRequest {
-            metadata_id: live_id!(A),
+            metadata_id: live_id,
             url,
             method: method.into(),
             headers: headers

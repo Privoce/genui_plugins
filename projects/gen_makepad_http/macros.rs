@@ -19,7 +19,7 @@ macro_rules! http_get {
     };
     ($Id: tt, $Url: expr, $Patch: expr, $cx: ident) => {
         gen_macro::inject_ref!(http1)
-            .get($Url, $Patch)
+            .get($Url, $Patch, live_id!($Id))
             .and_then(|request| {
                 $cx.http_request(live_id!($Id), request);
                 Ok(())
@@ -48,7 +48,7 @@ macro_rules! http_post {
     };
     ($Id: tt, $Url: expr, $Patch: expr, $cx: ident) => {
         gen_macro::inject_ref!(http1)
-            .post($Url, $Patch)
+            .post($Url, $Patch, live_id!($Id))
             .and_then(|request| {
                 $cx.http_request(live_id!($Id), request);
                 Ok(())
@@ -76,7 +76,7 @@ macro_rules! http_put {
     };
     ($Id: tt, $Url: expr, $Patch: expr, $cx: ident) => {
         gen_macro::inject_ref!(http1)
-            .put($Url, $Patch)
+            .put($Url, $Patch, live_id!($Id))
             .and_then(|request| {
                 $cx.http_request(live_id!($Id), request);
                 Ok(())
@@ -104,7 +104,7 @@ macro_rules! http_delete {
     };
     ($Id: tt, $Url: expr, $Patch: expr, $cx: ident) => {
         gen_macro::inject_ref!(http1)
-            .delete($Url, $Patch)
+            .delete($Url, $Patch, live_id!($Id))
             .and_then(|request| {
                 $cx.http_request(live_id!($Id), request);
                 Ok(())
@@ -118,11 +118,11 @@ macro_rules! http_request {
         $F: ident : $M: path
     )*) => {
         $(
-            pub fn $F<P>(&self, url: &str, patch: P) -> Result<HttpRequest, Box<dyn Error>>
+            pub fn $F<P>(&self, url: &str, patch: P, live_id: LiveId) -> Result<HttpRequest, Box<dyn Error>>
             where
                 P: Into<PatchRequest>,
             {
-                self.send_request(url, patch, $M)
+                self.send_request(url, patch, $M, live_id)
             }
         )*
     };
