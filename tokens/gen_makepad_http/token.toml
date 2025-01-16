@@ -7,8 +7,13 @@ category = "network"
 repo = { git = "https://github.com/Privoce/genui_plugins/tree/main/projects/gen_makepad_http" }
 
 [macros]
-http_get = { category = "prop_macro", stmts = 'if mac . ident == "http_get" { mac . tokens . push_str (", cx") ; }' }
-http_post = { category = "prop_macro", stmts = 'if mac . ident == "http_post" { mac . tokens . push_str (", cx") ; }' }
-http_put = { category = "prop_macro", stmts = 'if mac . ident == "http_put" { mac . tokens . push_str (", cx") ; }' }
-http_delete = { category = "prop_macro", stmts = 'if mac . ident == "http_delete" { mac . tokens . push_str (", cx") ; }' }
-http_patch = { category = "prop_macro", stmts = 'if mac . ident == "http_patch" { mac . tokens . push_str (", cx") ; }' }
+http_get = { category = "prop_macro", stmts = 'if mac . ident == "http_get" { mac . tokens . push_str (", cx") ; return true; }' }
+http_post = { category = "prop_macro", stmts = 'if mac . ident == "http_post" { mac . tokens . push_str (", cx") ; return true; }' }
+http_put = { category = "prop_macro", stmts = 'if mac . ident == "http_put" { mac . tokens . push_str (", cx") ; return true; }' }
+http_delete = { category = "prop_macro", stmts = 'if mac . ident == "http_delete" { mac . tokens . push_str (", cx") ; return true; }' }
+http_patch = { category = "prop_macro", stmts = 'if mac . ident == "http_patch" { mac . tokens . push_str (", cx") ; return true; }' }
+
+[dependencies]
+serde = "1.0.217"
+lazy_static = "1.5.0"
+serde_json = "1.0.135"

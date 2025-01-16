@@ -1,6 +1,14 @@
 /// A macro to simplify the creation of a GET request.
 #[macro_export]
 macro_rules! http_get {
+    ($Id: tt, $cx: ident) => {
+        http_get!(
+            $Id,
+            "",
+            crate::gen_makepad_http::PatchRequest::default(),
+            $cx
+        )
+    };
     ($Id: tt, $Url: expr, $cx: ident) => {
         http_get!(
             $Id,
@@ -22,6 +30,14 @@ macro_rules! http_get {
 /// A macro to simplify the creation of a POST request.
 #[macro_export]
 macro_rules! http_post {
+    ($Id: tt, $cx: ident) => {
+        http_post!(
+            $Id,
+            "",
+            crate::gen_makepad_http::PatchRequest::default(),
+            $cx
+        )
+    };
     ($Id: tt, $Url: expr, $cx: ident) => {
         http_post!(
             $Id,
@@ -42,6 +58,14 @@ macro_rules! http_post {
 
 #[macro_export]
 macro_rules! http_put {
+    ($Id: tt, $cx: ident) => {
+        http_put!(
+            $Id,
+            "",
+            crate::gen_makepad_http::PatchRequest::default(),
+            $cx
+        )
+    };
     ($Id: tt, $Url: expr, $cx: ident) => {
         http_put!(
             $Id,
@@ -62,6 +86,14 @@ macro_rules! http_put {
 
 #[macro_export]
 macro_rules! http_delete {
+    ($Id: tt, $cx: ident) => {
+        http_delete!(
+            $Id,
+            "",
+            crate::gen_makepad_http::PatchRequest::default(),
+            $cx
+        )
+    };
     ($Id: tt, $Url: expr, $cx: ident) => {
         http_delete!(
             $Id,
